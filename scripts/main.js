@@ -1,12 +1,9 @@
 // module aliases
 
 // eslint-disable-next-line no-undef
-const { Engine } = Matter;
-const { Render } = Matter;
-const { Runner } = Matter;
-const { Bodies } = Matter;
-const { Composite } = Matter;
-const { MouseConstraint } = Matter;
+const {
+  Engine, Render, Runner, Bodies, Composite, MouseConstraint, Composites, Body, Constraint,
+} = Matter;
 
 // create an engine
 const engine = Engine.create();
@@ -18,21 +15,70 @@ const render = Render.create({
   options: {
     width: 1000,
     height: 1000,
+    wireframes: false,
+    background: '#ffffff',
   },
 });
 const mouseConstraint = MouseConstraint.create(engine, { element: document.querySelector('body') });
 
-// create two boxes and a ground
-const boxA = Bodies.rectangle(400, 200, 80, 80);
-const boxB = Bodies.rectangle(450, 50, 80, 80);
-const gbottom = Bodies.rectangle(500, 1010, 1010, 60, { isStatic: true });
-const gleft = Bodies.rectangle(10, 500, 60, 1010, { isStatic: true });
-const gright = Bodies.rectangle(1010, 500, 60, 1010, { isStatic: true });
-const gtop = Bodies.rectangle(500, 10, 1010, 60, { isStatic: true });
-const stack = [ryan, boxB, gbottom, gleft, gright, gtop];
-Composite.add(engine.world, [stack, mouseConstraint]);
+const elyse = Bodies.circle(500, 500, 121, {
+  render: {
+    strokeStyle: '#ffffff',
+    sprite: {
+      texture: '/images/elyse.png',
+      xScale: 1,
+      yScale: 1,
+    },
+  },
+  isStatic: true,
+});
+
+// add bodies
+const group = Body.nextGroup(true);
+
+const ryan = Bodies.circle(500, 400, 35, {
+  render: {
+    strokeStyle: '#ffffff',
+    sprite: {
+      texture: '/images/ryan.png',
+      xScale: 0.1,
+      yScale: 0.1,
+      xOffset: 0.5,
+    },
+  },
+});
+const ropeA = Composites.stack(500, 400, 8, 1, 10, 10, (x, y, i) => {
+  const isRyan = i === 7;
+  if (isRyan) {
+    return ryan;
+  }
+  return Bodies.rectangle(x, y, 50, 25, {
+    collisionFilter: { group },
+    render: {
+      sprite: {
+        texture: '/images/tail.png',
+      },
+    },
+  });
+});
+
+Composites.chain(ropeA, 0.5, 0, -0.5, 0, {
+  stiffness: 0.8,
+  length: 2,
+  render: {
+    type: 'line', strokeStyle: '#171a18', lineWidth: 20, anchors: false,
+  },
+});
+Composite.add(ropeA, Constraint.create({
+  bodyB: ropeA.bodies[0],
+  pointB: { x: -25, y: 0 },
+  pointA: { x: 500, y: 400 },
+  stiffness: 0.5,
+}));
+
+const stack = [elyse, ropeA];
+Composite.add(engine.world, [...stack, mouseConstraint]);
 // add all of the bodies to the world
-Composite.add(engine.world, stack);
 
 // run the renderer
 Render.run(render);
