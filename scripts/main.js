@@ -25,7 +25,7 @@ const elyse = Bodies.circle(500, 500, 121, {
   render: {
     strokeStyle: '#ffffff',
     sprite: {
-      texture: '/images/elyse.png',
+      texture: 'images/elyse.png',
       xScale: 1,
       yScale: 1,
     },
