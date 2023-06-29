@@ -67,7 +67,7 @@ Composites.chain(ropeA, 0.5, 0, -0.5, 0, {
   stiffness: 0.8,
   length: 2,
   render: {
-    strokeStyle: '#171a18',
+    strokeStyle: '#171a18', anchors: false,
   },
 });
 Composite.add(ropeA, Constraint.create({
@@ -77,6 +77,7 @@ Composite.add(ropeA, Constraint.create({
   stiffness: 0.5,
   render: {
     strokeStyle: '#171a18',
+    anchors: false,
   },
 }));
 
