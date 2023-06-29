@@ -52,11 +52,12 @@ const ropeA = Composites.stack(510, 265, 8, 1, 10, 10, (x, y, i) => {
   if (isRyan) {
     return ryan;
   }
-  return Bodies.rectangle(x, y, 50, 25, {
+  return Bodies.rectangle(x, y, 25, 12, {
     collisionFilter: { group },
     render: {
       sprite: {
         texture: 'images/tail.png',
+        yScale: 0.5,
       },
     },
   });
@@ -66,7 +67,7 @@ Composites.chain(ropeA, 0.5, 0, -0.5, 0, {
   stiffness: 0.8,
   length: 2,
   render: {
-    type: 'line', strokeStyle: '#171a18', lineWidth: 20, anchors: false,
+    strokeStyle: '#171a18',
   },
 });
 Composite.add(ropeA, Constraint.create({
