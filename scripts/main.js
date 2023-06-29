@@ -40,7 +40,7 @@ const ryan = Bodies.circle(500, 400, 35, {
   render: {
     strokeStyle: '#ffffff',
     sprite: {
-      texture: './images/ryan.png',
+      texture: 'images/ryan.png',
       xScale: 0.1,
       yScale: 0.1,
       xOffset: 0.5,
@@ -56,7 +56,7 @@ const ropeA = Composites.stack(500, 400, 8, 1, 10, 10, (x, y, i) => {
     collisionFilter: { group },
     render: {
       sprite: {
-        texture: './images/tail.png',
+        texture: 'images/tail.png',
       },
     },
   });
