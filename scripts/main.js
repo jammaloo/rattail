@@ -21,7 +21,7 @@ const render = Render.create({
 });
 const mouseConstraint = MouseConstraint.create(engine, { element: document.querySelector('body') });
 
-const elyse = Bodies.circle(500, 500, 121, {
+const elyse = Bodies.circle(500, 200, 121, {
   render: {
     strokeStyle: '#ffffff',
     sprite: {
@@ -36,7 +36,7 @@ const elyse = Bodies.circle(500, 500, 121, {
 // add bodies
 const group = Body.nextGroup(true);
 
-const ryan = Bodies.circle(500, 400, 35, {
+const ryan = Bodies.circle(500, 100, 35, {
   render: {
     strokeStyle: '#ffffff',
     sprite: {
@@ -47,7 +47,7 @@ const ryan = Bodies.circle(500, 400, 35, {
     },
   },
 });
-const ropeA = Composites.stack(510, 565, 8, 1, 10, 10, (x, y, i) => {
+const ropeA = Composites.stack(510, 365, 8, 1, 10, 10, (x, y, i) => {
   const isRyan = i === 7;
   if (isRyan) {
     return ryan;
@@ -72,7 +72,7 @@ Composites.chain(ropeA, 0.5, 0, -0.5, 0, {
 Composite.add(ropeA, Constraint.create({
   bodyB: ropeA.bodies[0],
   pointB: { x: -25, y: 0 },
-  pointA: { x: 510, y: 565 },
+  pointA: { x: 510, y: 265 },
   stiffness: 0.5,
 }));
 
