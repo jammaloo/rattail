@@ -47,7 +47,7 @@ const ryan = Bodies.circle(500, 100, 35, {
     },
   },
 });
-const ropeA = Composites.stack(510, 365, 8, 1, 10, 10, (x, y, i) => {
+const ropeA = Composites.stack(510, 265, 8, 1, 10, 10, (x, y, i) => {
   const isRyan = i === 7;
   if (isRyan) {
     return ryan;
