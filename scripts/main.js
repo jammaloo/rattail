@@ -47,7 +47,7 @@ const ryan = Bodies.circle(500, 400, 35, {
     },
   },
 });
-const ropeA = Composites.stack(500, 400, 8, 1, 10, 10, (x, y, i) => {
+const ropeA = Composites.stack(510, 565, 8, 1, 10, 10, (x, y, i) => {
   const isRyan = i === 7;
   if (isRyan) {
     return ryan;
@@ -72,7 +72,7 @@ Composites.chain(ropeA, 0.5, 0, -0.5, 0, {
 Composite.add(ropeA, Constraint.create({
   bodyB: ropeA.bodies[0],
   pointB: { x: -25, y: 0 },
-  pointA: { x: 500, y: 400 },
+  pointA: { x: 510, y: 565 },
   stiffness: 0.5,
 }));
 
