@@ -74,6 +74,9 @@ Composite.add(ropeA, Constraint.create({
   pointB: { x: -25, y: 0 },
   pointA: { x: 510, y: 265 },
   stiffness: 0.5,
+  render: {
+    strokeStyle: '#171a18',
+  },
 }));
 
 const stack = [elyse, ropeA];
